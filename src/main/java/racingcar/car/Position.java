@@ -22,7 +22,14 @@ class Position implements Comparable<Position> {
 
     @Override
     public boolean equals(Object o) {
-        return o instanceof Position && compareTo((Position) o) == 0;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        final Position position = (Position) o;
+        return value == position.value;
     }
 
     @Override
