@@ -10,11 +10,11 @@ public class Condition implements Comparable<Condition>{
     private final int value;
 
     protected Condition(int value) {
+        validate(value);
         this.value = value;
     }
 
     public static Condition of(int value) {
-        validate(value);
         return new Condition(value);
     }
 

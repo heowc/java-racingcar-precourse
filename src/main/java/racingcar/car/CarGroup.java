@@ -14,17 +14,16 @@ public class CarGroup {
 
     private final List<Car> cars;
 
-    protected CarGroup(List<Car> cars) {
+    private CarGroup(List<Car> cars) {
         this.cars = requireNonNull(cars, "cars");
     }
 
+    protected CarGroup(String value) {
+        this(toCars(value));
+    }
+
     public static CarGroup of(String value) {
-        final String[] carNames = toCarNames(value);
-        final List<Car> cars = new ArrayList<>(carNames.length);
-        for (String carName : carNames) {
-            cars.add(Car.of(carName));
-        }
-        return new CarGroup(cars);
+        return new CarGroup(value);
     }
 
     public List<Car> asList() {
@@ -33,6 +32,15 @@ public class CarGroup {
 
     public void forEach(Consumer<Car> action) {
         cars.forEach(action);
+    }
+
+    private static List<Car> toCars(String value) {
+        final String[] carNames = toCarNames(value);
+        final List<Car> cars = new ArrayList<>(carNames.length);
+        for (String carName : carNames) {
+            cars.add(Car.of(carName));
+        }
+        return cars;
     }
 
     private static String[] toCarNames(String value) {

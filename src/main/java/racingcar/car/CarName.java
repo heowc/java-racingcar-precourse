@@ -8,23 +8,12 @@ class CarName {
 
     private final String value;
 
-    public static CarName of(String value) {
-        return new CarName(value);
-    }
-
     protected CarName(String value) {
         this.value = validate(value);
     }
 
-    private static String validate(String value) {
-        if (value == null) {
-            throw new InvalidCarNameException(null);
-        }
-        value = value.trim();
-        if (value.isEmpty() || value.length() > MAX_LENGTH) {
-            throw new InvalidCarNameException(value);
-        }
-        return value;
+    public static CarName of(String value) {
+        return new CarName(value);
     }
 
     public String value() {
@@ -46,5 +35,16 @@ class CarName {
     @Override
     public int hashCode() {
         return Objects.hash(value);
+    }
+
+    private static String validate(String value) {
+        if (value == null) {
+            throw new InvalidCarNameException(null);
+        }
+        value = value.trim();
+        if (value.isEmpty() || value.length() > MAX_LENGTH) {
+            throw new InvalidCarNameException(value);
+        }
+        return value;
     }
 }
